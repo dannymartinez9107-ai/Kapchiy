@@ -5,14 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kapchiy - Calzado & Moda</title>
   <style>
-    :root {
-      --primary: #111111;
-      --ws: #25D366;
-      --ws-hover: #1eb954;
-      --bg: #f4f6f8;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    :root { --primary: #111; --ws: #25D366; --bg: #f4f6f8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { background-color: var(--bg); color: #222; padding-bottom: 60px; }
 
     header { background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; }
@@ -25,8 +19,8 @@
     .catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
     .card { background: white; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     
-    .img-container { position: relative; width: 100%; height: 210px; border-radius: 8px; overflow: hidden; background: #eee; }
-    .card-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
+    .img-container { position: relative; width: 100%; height: 220px; border-radius: 8px; overflow: hidden; background: #eee; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; }
     .thumbs { display: flex; gap: 6px; margin: 8px 0; justify-content: center; }
     .thumb { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; cursor: pointer; border: 2px solid transparent; }
     .thumb.active { border-color: var(--primary); }
@@ -35,20 +29,18 @@
     .card .price { font-size: 1.15rem; font-weight: bold; color: #2e7d32; margin-bottom: 10px; }
 
     select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; outline: none; background: #fff; font-size: 0.9rem; }
-    .btn-add { background: var(--primary); color: white; border: none; padding: 11px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
+    .btn-add { background: var(--primary); color: white; border: none; padding: 11px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; }
     .btn-add:hover { background: #333; }
 
     .cart { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 20px; }
     .cart h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; font-size: 1.25rem; }
     .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
-    .btn-del { background: none; border: none; color: #d32f2f; font-weight: bold; cursor: pointer; margin-left: 10px; font-size: 1rem; }
+    .btn-del { background: none; border: none; color: #d32f2f; font-weight: bold; cursor: pointer; font-size: 1rem; }
     .cart-total { font-size: 1.2rem; font-weight: bold; display: flex; justify-content: space-between; border-top: 2px solid #eee; padding-top: 12px; margin: 15px 0; }
 
     form { display: flex; flex-direction: column; gap: 10px; }
     input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; outline: none; font-size: 0.9rem; }
-    input:focus { border-color: var(--primary); }
-    .btn-ws { background: var(--ws); color: white; border: none; padding: 13px; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
-    .btn-ws:hover { background: var(--ws-hover); }
+    .btn-ws { background: var(--ws); color: white; border: none; padding: 13px; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -80,15 +72,29 @@
   <script>
     const TELEFONO_WHATSAPP = "573167307767";
 
-    // Se usan los nombres exactos con la extensión .jpg.jpeg que subiste a GitHub
     const productos = [
-      { id: 1, nombre: "Kapchiy Azules High", precio: 150000, imagenes: ["kapchiy-01.jpg.jpeg", "kapchiy-02.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41", "42"] },
-      { id: 2, nombre: "Kapchiy Negros High", precio: 150000, imagenes: ["kapchiy-03.jpg.jpeg", "kapchiy-04.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41", "42"] },
-      { id: 3, nombre: "Kapchiy Tricolor High", precio: 150000, imagenes: ["kapchiy-05.jpg.jpeg", "kapchiy-06.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41"] },
-      { id: 4, nombre: "Kapchiy Café Gum", precio: 150000, imagenes: ["kapchiy-07.jpg.jpeg", "kapchiy-08.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41", "42"] },
-      { id: 5, nombre: "Kapchiy Verdes High", precio: 150000, imagenes: ["kapchiy-09.jpg.jpeg", "kapchiy-10.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41"] },
-      { id: 6, nombre: "Kapchiy Naranja & Turquesa", precio: 150000, imagenes: ["kapchiy-11.jpg.jpeg", "kapchiy-11.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41"] }
+      { id: 1, nombre: "Kapchiy Azules High", precio: 150000, baseImgs: ["kapchiy-01", "kapchiy-02"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 2, nombre: "Kapchiy Negros High", precio: 150000, baseImgs: ["kapchiy-03", "kapchiy-04"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 3, nombre: "Kapchiy Tricolor High", precio: 150000, baseImgs: ["kapchiy-05", "kapchiy-06"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 4, nombre: "Kapchiy Café Gum", precio: 150000, baseImgs: ["kapchiy-07", "kapchiy-08"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 5, nombre: "Kapchiy Verdes High", precio: 150000, baseImgs: ["kapchiy-09", "kapchiy-10"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 6, nombre: "Kapchiy Naranja & Turquesa", precio: 150000, baseImgs: ["kapchiy-11", "kapchiy-12"], tallas: ["37", "38", "39", "40", "41"] }
     ];
+
+    // Posibles extensiones que GitHub puede haber asignado al subir
+    const extensiones = [".jpg.jpeg", ".jpg", ".jpeg", ".JPG", ".PNG", ".png"];
+
+    function probarImagen(imgElement, nombreBase) {
+      let extIndex = 0;
+      function intentarSiguiente() {
+        if (extIndex < extensiones.length) {
+          imgElement.src = nombreBase + extensiones[extIndex];
+          extIndex++;
+        }
+      }
+      imgElement.onerror = intentarSiguiente;
+      intentarSiguiente();
+    }
 
     let carrito = [];
 
@@ -98,11 +104,11 @@
         <div class="card">
           <div>
             <div class="img-container">
-              <img id="main-img-${p.id}" src="${p.imagenes[0]}" alt="${p.nombre}" class="card-img">
+              <img id="main-img-${p.id}" class="card-img" alt="${p.nombre}">
             </div>
             <div class="thumbs">
-              ${p.imagenes.map((img, idx) => `
-                <img src="${img}" class="thumb ${idx === 0 ? 'active' : ''}" onclick="cambiarImagen(${p.id}, '${img}', this)">
+              ${p.baseImgs.map((base, idx) => `
+                <img id="thumb-${p.id}-${idx}" class="thumb ${idx === 0 ? 'active' : ''}" onclick="cambiarImagen(${p.id}, '${base}', this)">
               `).join('')}
             </div>
             <h3>${p.nombre}</h3>
@@ -117,10 +123,22 @@
           </div>
         </div>
       `).join('');
+
+      // Cargar imágenes probando extensiones automáticamente
+      productos.forEach(p => {
+        const mainImg = document.getElementById(`main-img-${p.id}`);
+        probarImagen(mainImg, p.baseImgs[0]);
+
+        p.baseImgs.forEach((base, idx) => {
+          const thumbImg = document.getElementById(`thumb-${p.id}-${idx}`);
+          probarImagen(thumbImg, base);
+        });
+      });
     }
 
-    function cambiarImagen(productoId, nuevaSrc, thumbEl) {
-      document.getElementById(`main-img-${productoId}`).src = nuevaSrc;
+    function cambiarImagen(productoId, baseNombre, thumbEl) {
+      const mainImg = document.getElementById(`main-img-${productoId}`);
+      probarImagen(mainImg, baseNombre);
       const thumbs = thumbEl.parentElement.querySelectorAll('.thumb');
       thumbs.forEach(t => t.classList.remove('active'));
       thumbEl.classList.add('active');
