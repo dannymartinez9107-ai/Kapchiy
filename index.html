@@ -22,11 +22,9 @@
     .main-container { max-width: 1200px; margin: 30px auto; padding: 0 15px; display: grid; grid-template-columns: 1fr 340px; gap: 25px; }
     @media (max-width: 850px) { .main-container { grid-template-columns: 1fr; } }
 
-    /* Grid del catálogo */
     .catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
     .card { background: white; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     
-    /* Galería miniatura */
     .img-container { position: relative; width: 100%; height: 210px; border-radius: 8px; overflow: hidden; background: #eee; }
     .card-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
     .thumbs { display: flex; gap: 6px; margin: 8px 0; justify-content: center; }
@@ -40,7 +38,6 @@
     .btn-add { background: var(--primary); color: white; border: none; padding: 11px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
     .btn-add:hover { background: #333; }
 
-    /* Carrito lateral */
     .cart { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 20px; }
     .cart h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; font-size: 1.25rem; }
     .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
@@ -81,18 +78,16 @@
   </div>
 
   <script>
-    // Tu número de WhatsApp configurado
     const TELEFONO_WHATSAPP = "573167307767";
 
-    // Modelos agrupados con sus 2 imágenes correspondientes
+    // Se usan los nombres exactos con la extensión .jpg.jpeg que subiste a GitHub
     const productos = [
-      { id: 1, nombre: "Kapchiy Azules High", precio: 150000, imagenes: ["kapchiy-01.jpg", "kapchiy-02.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] },
-      { id: 2, nombre: "Kapchiy Negros High", precio: 150000, imagenes: ["kapchiy-03.jpg", "kapchiy-04.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] },
-      { id: 3, nombre: "Kapchiy Tricolor High", precio: 150000, imagenes: ["kapchiy-06.jpg", "kapchiy-07.jpg"], tallas: ["37", "38", "39", "40", "41"] },
-      { id: 4, nombre: "Kapchiy Café Gum", precio: 150000, imagenes: ["kapchiy-07.jpg", "kapchiy-08.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] },
-      { id: 5, nombre: "Kapchiy Verdes High", precio: 150000, imagenes: ["kapchiy-09.jpg", "kapchiy-11.jpg"], tallas: ["37", "38", "39", "40", "41"] },
-      { id: 6, nombre: "Kapchiy Naranja & Turquesa", precio: 150000, imagenes: ["kapchiy-11.jpg", "kapchiy-12.jpg"], tallas: ["37", "38", "39", "40", "41"] },
-      { id: 7, nombre: "Kapchiy Verdes Low Edition", precio: 150000, imagenes: ["kapchiy-13.jpg", "kapchiy-14.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] }
+      { id: 1, nombre: "Kapchiy Azules High", precio: 150000, imagenes: ["kapchiy-01.jpg.jpeg", "kapchiy-02.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 2, nombre: "Kapchiy Negros High", precio: 150000, imagenes: ["kapchiy-03.jpg.jpeg", "kapchiy-04.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 3, nombre: "Kapchiy Tricolor High", precio: 150000, imagenes: ["kapchiy-05.jpg.jpeg", "kapchiy-06.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 4, nombre: "Kapchiy Café Gum", precio: 150000, imagenes: ["kapchiy-07.jpg.jpeg", "kapchiy-08.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 5, nombre: "Kapchiy Verdes High", precio: 150000, imagenes: ["kapchiy-09.jpg.jpeg", "kapchiy-10.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 6, nombre: "Kapchiy Naranja & Turquesa", precio: 150000, imagenes: ["kapchiy-11.jpg.jpeg", "kapchiy-11.jpg.jpeg"], tallas: ["37", "38", "39", "40", "41"] }
     ];
 
     let carrito = [];
