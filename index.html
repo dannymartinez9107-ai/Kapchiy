@@ -3,46 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kapchiy - Tienda Oficial</title>
+  <title>Kapchiy - Calzado & Moda</title>
   <style>
     :root {
-      --primary: #111;
+      --primary: #111111;
       --ws: #25D366;
       --ws-hover: #1eb954;
-      --bg: #f8f9fa;
+      --bg: #f4f6f8;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    body { background: var(--bg); color: #222; padding-bottom: 60px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg); color: #222; padding-bottom: 60px; }
 
     header { background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; }
-    header h1 { font-size: 2.2rem; letter-spacing: 2px; }
+    header h1 { font-size: 2.2rem; letter-spacing: 3px; }
+    header p { opacity: 0.8; font-size: 0.95rem; margin-top: 5px; }
 
-    .banner-container { max-width: 1200px; margin: 20px auto 0; padding: 0 15px; }
-    .banner-img { width: 100%; max-height: 280px; object-fit: cover; border-radius: 8px; }
-
-    .main-container { max-width: 1200px; margin: 25px auto; padding: 0 15px; display: grid; grid-template-columns: 1fr 340px; gap: 25px; }
+    .main-container { max-width: 1200px; margin: 30px auto; padding: 0 15px; display: grid; grid-template-columns: 1fr 340px; gap: 25px; }
     @media (max-width: 850px) { .main-container { grid-template-columns: 1fr; } }
 
-    .catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
-    .card { background: white; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .card img { width: 100%; height: 210px; object-fit: cover; border-radius: 6px; background: #eee; }
-    .card h3 { font-size: 1rem; margin: 8px 0 4px; }
-    .card .price { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; }
+    /* Grid del catálogo */
+    .catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .card { background: white; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    
+    /* Galería miniatura */
+    .img-container { position: relative; width: 100%; height: 210px; border-radius: 8px; overflow: hidden; background: #eee; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
+    .thumbs { display: flex; gap: 6px; margin: 8px 0; justify-content: center; }
+    .thumb { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; cursor: pointer; border: 2px solid transparent; }
+    .thumb.active { border-color: var(--primary); }
 
-    select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 8px; outline: none; }
-    .btn-add { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; }
+    .card h3 { font-size: 1.05rem; margin: 6px 0 4px; color: #111; }
+    .card .price { font-size: 1.15rem; font-weight: bold; color: #2e7d32; margin-bottom: 10px; }
+
+    select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; outline: none; background: #fff; font-size: 0.9rem; }
+    .btn-add { background: var(--primary); color: white; border: none; padding: 11px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
     .btn-add:hover { background: #333; }
 
-    .cart { background: white; padding: 18px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); height: fit-content; position: sticky; top: 15px; }
-    .cart h2 { border-bottom: 2px solid #eee; padding-bottom: 8px; margin-bottom: 12px; font-size: 1.2rem; }
-    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; }
-    .btn-del { background: none; border: none; color: red; font-weight: bold; cursor: pointer; margin-left: 8px; }
-    .cart-total { font-size: 1.15rem; font-weight: bold; display: flex; justify-content: space-between; border-top: 2px solid #eee; padding-top: 10px; margin: 12px 0; }
+    /* Carrito lateral */
+    .cart { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 20px; }
+    .cart h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; font-size: 1.25rem; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
+    .btn-del { background: none; border: none; color: #d32f2f; font-weight: bold; cursor: pointer; margin-left: 10px; font-size: 1rem; }
+    .cart-total { font-size: 1.2rem; font-weight: bold; display: flex; justify-content: space-between; border-top: 2px solid #eee; padding-top: 12px; margin: 15px 0; }
 
-    form { display: flex; flex-direction: column; gap: 8px; }
-    input { padding: 9px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 0.9rem; }
-    .btn-ws { background: var(--ws); color: white; border: none; padding: 12px; border-radius: 4px; font-weight: bold; font-size: 0.95rem; cursor: pointer; margin-top: 4px; }
+    form { display: flex; flex-direction: column; gap: 10px; }
+    input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; outline: none; font-size: 0.9rem; }
+    input:focus { border-color: var(--primary); }
+    .btn-ws { background: var(--ws); color: white; border: none; padding: 13px; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
     .btn-ws:hover { background: var(--ws-hover); }
   </style>
 </head>
@@ -50,12 +58,8 @@
 
   <header>
     <h1>KAPCHIY</h1>
-    <p>Catálogo de Productos</p>
+    <p>Colección Exclusiva — Calzado & Moda</p>
   </header>
-
-  <div class="banner-container">
-    <img src="kapchiy-banner.jpg" alt="Banner" class="banner-img" onerror="probarExtensiones(this, ['kapchiy-banner.png', 'kapchiy-banner.jpeg', 'kapchiy-banner.webp'])">
-  </div>
 
   <div class="main-container">
     <div class="catalog" id="catalog"></div>
@@ -70,74 +74,67 @@
 
       <form onsubmit="enviarWhatsApp(event)">
         <input type="text" id="nombre" placeholder="Nombre completo" required>
-        <input type="text" id="direccion" placeholder="Dirección y Ciudad" required>
+        <input type="text" id="direccion" placeholder="Dirección de envío y Ciudad" required>
         <button type="submit" class="btn-ws">Pedir por WhatsApp 💬</button>
       </form>
     </div>
   </div>
 
   <script>
-    // PON TU NÚMERO AQUÍ (Código de país + número, sin espacios ni el signo +)
-    const TELEFONO_WHATSAPP = "573000000000";
+    // Tu número de WhatsApp configurado
+    const TELEFONO_WHATSAPP = "573167307767";
 
-    const productos = Array.from({ length: 24 }, (_, i) => {
-      const num = String(i + 1).padStart(2, '0');
-      return {
-        id: i + 1,
-        nombre: `Modelo Kapchiy ${num}`,
-        precio: 150000,
-        img: `kapchiy-${num}.jpg`,
-        tallas: ["36", "37", "38", "39", "40"]
-      };
-    });
+    // Modelos agrupados con sus 2 imágenes correspondientes
+    const productos = [
+      { id: 1, nombre: "Kapchiy Azules High", precio: 150000, imagenes: ["kapchiy-01.jpg", "kapchiy-02.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 2, nombre: "Kapchiy Negros High", precio: 150000, imagenes: ["kapchiy-03.jpg", "kapchiy-04.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 3, nombre: "Kapchiy Tricolor High", precio: 150000, imagenes: ["kapchiy-06.jpg", "kapchiy-07.jpg"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 4, nombre: "Kapchiy Café Gum", precio: 150000, imagenes: ["kapchiy-07.jpg", "kapchiy-08.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] },
+      { id: 5, nombre: "Kapchiy Verdes High", precio: 150000, imagenes: ["kapchiy-09.jpg", "kapchiy-11.jpg"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 6, nombre: "Kapchiy Naranja & Turquesa", precio: 150000, imagenes: ["kapchiy-11.jpg", "kapchiy-12.jpg"], tallas: ["37", "38", "39", "40", "41"] },
+      { id: 7, nombre: "Kapchiy Verdes Low Edition", precio: 150000, imagenes: ["kapchiy-13.jpg", "kapchiy-14.jpg"], tallas: ["37", "38", "39", "40", "41", "42"] }
+    ];
 
     let carrito = [];
 
-    // Función para intentar cargar la foto si la extensión es .png, .jpeg, etc.
-    function probarExtensiones(img, fallbacks) {
-      if (!img.dataset.fallbacks) {
-        img.dataset.fallbacks = JSON.stringify(fallbacks);
-      }
-      let lista = JSON.parse(img.dataset.fallbacks);
-      if (lista.length > 0) {
-        let siguiente = lista.shift();
-        img.dataset.fallbacks = JSON.stringify(lista);
-        img.src = siguiente;
-      } else {
-        img.onerror = null;
-        img.src = 'https://via.placeholder.com/200?text=Sin+Imagen';
-      }
-    }
-
     function renderizarCatalogo() {
       const catalogEl = document.getElementById('catalog');
-      catalogEl.innerHTML = productos.map(p => {
-        const num = String(p.id).padStart(2, '0');
-        const fallbacks = [
-          `kapchiy-${num}.png`,
-          `kapchiy-${num}.jpeg`,
-          `kapchiy-${num}.WEBP`,
-          `kapchiy-${num}.webp`
-        ];
-        return `
-          <div class="card">
-            <img src="${p.img}" alt="${p.nombre}" onerror="probarExtensiones(this, ${JSON.stringify(fallbacks)})">
+      catalogEl.innerHTML = productos.map(p => `
+        <div class="card">
+          <div>
+            <div class="img-container">
+              <img id="main-img-${p.id}" src="${p.imagenes[0]}" alt="${p.nombre}" class="card-img">
+            </div>
+            <div class="thumbs">
+              ${p.imagenes.map((img, idx) => `
+                <img src="${img}" class="thumb ${idx === 0 ? 'active' : ''}" onclick="cambiarImagen(${p.id}, '${img}', this)">
+              `).join('')}
+            </div>
             <h3>${p.nombre}</h3>
             <div class="price">$${p.precio.toLocaleString('es-CO')}</div>
+          </div>
+          <div>
             <select id="size-${p.id}">
               <option value="">Seleccionar Talla</option>
               ${p.tallas.map(t => `<option value="${t}">Talla: ${t}</option>`).join('')}
             </select>
             <button class="btn-add" onclick="agregarAlCarrito(${p.id})">Agregar al Carrito</button>
           </div>
-        `;
-      }).join('');
+        </div>
+      `).join('');
+    }
+
+    function cambiarImagen(productoId, nuevaSrc, thumbEl) {
+      document.getElementById(`main-img-${productoId}`).src = nuevaSrc;
+      const thumbs = thumbEl.parentElement.querySelectorAll('.thumb');
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumbEl.classList.add('active');
     }
 
     function agregarAlCarrito(id) {
       const select = document.getElementById(`size-${id}`);
       if (!select.value) {
-        alert("Selecciona una talla primero.");
+        alert("Por favor selecciona una talla antes de agregar.");
         return;
       }
       const p = productos.find(item => item.id === id);
@@ -159,7 +156,7 @@
         <div class="cart-item">
           <div>
             <strong>${item.nombre}</strong><br>
-            <small>Talla: ${item.talla} - $${item.precio.toLocaleString('es-CO')}</small>
+            <small>Talla: ${item.talla} — $${item.precio.toLocaleString('es-CO')}</small>
           </div>
           <button class="btn-del" onclick="eliminarDelCarrito(${item.cartId})">✕</button>
         </div>
@@ -177,7 +174,7 @@
     function enviarWhatsApp(e) {
       e.preventDefault();
       if (carrito.length === 0) {
-        alert("El carrito está vacío.");
+        alert("Agrega al menos un producto al carrito.");
         return;
       }
 
@@ -187,7 +184,11 @@
       let detalle = carrito.map((item, i) => `${i + 1}. *${item.nombre}* - Talla: ${item.talla} ($${item.precio.toLocaleString('es-CO')})`).join('\n');
       const total = carrito.reduce((sum, item) => sum + item.precio, 0);
 
-      const mensaje = `*PEDIDO KAPCHIY*\n\n👤 *Cliente:* ${nombre}\n📍 *Dirección:* ${direccion}\n\n📦 *Productos:*\n${detalle}\n\n💰 *Total:* $${total.toLocaleString('es-CO')}`;
+      const mensaje = `*¡NUEVO PEDIDO KAPCHIY!* 🛍️\n\n` +
+                      `👤 *Cliente:* ${nombre}\n` +
+                      `📍 *Dirección:* ${direccion}\n\n` +
+                      `📦 *Productos ordenados:*\n${detalle}\n\n` +
+                      `💰 *Total a pagar:* $${total.toLocaleString('es-CO')}`;
 
       window.open(`https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
     }
