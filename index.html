@@ -3,63 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kapchiy - Tienda Oficial</title>
+  <title>Kapchiy - Tienda Virtual</title>
   <style>
     :root {
       --primary: #25D366;
       --primary-dark: #1eb954;
-      --brand-dark: #111111;
-      --bg: #f8f9fa;
-      --text: #222222;
+      --brand-dark: #1a1a1a;
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --text: #333333;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 60px; }
 
-    /* Header & Hero Banner */
-    header { background: var(--brand-dark); color: white; text-align: center; padding: 1rem; position: sticky; top: 0; z-index: 100; }
-    header h1 { font-size: 1.8rem; letter-spacing: 2px; }
+    header { 
+      background: var(--brand-dark); 
+      color: white; 
+      text-align: center; 
+      padding: 1.2rem; 
+      position: sticky; 
+      top: 0; 
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    header h1 { font-size: 1.8rem; letter-spacing: 3px; text-transform: uppercase; margin: 0; }
 
     .hero {
-      position: relative;
-      height: 350px;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('kapchiy-banner.jpg') center/cover no-repeat;
+      background: #2b2b2b;
+      height: 180px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
       color: white;
+      text-align: center;
       padding: 20px;
     }
-    .hero h2 { font-size: 2.2rem; margin-bottom: 10px; }
-    .hero p { font-size: 1.1rem; opacity: 0.9; }
+    .hero h2 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 600; color: #ffffff; }
+    .hero p { font-size: 1rem; color: #dddddd; }
 
-    /* Layout principal */
-    .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; display: grid; grid-template-columns: 2.8fr 1.2fr; gap: 25px; }
-    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .container { 
+      max-width: 1200px; 
+      margin: 30px auto; 
+      padding: 0 15px; 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 25px; 
+    }
 
-    /* Catálogo Grid */
-    .catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-    .card { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: transform 0.2s; }
-    .card:hover { transform: translateY(-4px); }
-    .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-    .card .category { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
-    .card h3 { font-size: 1rem; margin: 5px 0; color: #111; }
-    .card .price { font-weight: bold; color: #2e7d32; font-size: 1.1rem; margin-bottom: 12px; }
-    .btn-add { background: var(--brand-dark); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.2s; }
+    @media (min-width: 900px) {
+      .container { grid-template-columns: 2.8fr 1.2fr; }
+    }
+
+    .catalog { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+      gap: 20px; 
+    }
+
+    .card { 
+      background: var(--card-bg); 
+      border-radius: 8px; 
+      padding: 15px; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+      transition: transform 0.2s, box-shadow 0.2s; 
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+    .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; background-color: #eee; }
+    .card .category { font-size: 0.75rem; color: #777; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
+    .card h3 { font-size: 1.05rem; margin: 5px 0; color: #111; }
+    .card .price { font-weight: bold; color: #2e7d32; font-size: 1.15rem; margin-bottom: 12px; }
+    .btn-add { background: var(--brand-dark); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
     .btn-add:hover { background: #333; }
 
-    /* Carrito */
-    .cart { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); height: fit-content; position: sticky; top: 90px; }
+    .cart { 
+      background: var(--card-bg); 
+      padding: 20px; 
+      border-radius: 8px; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+      height: fit-content; 
+    }
     .cart h2 { border-bottom: 2px solid var(--bg); padding-bottom: 10px; margin-bottom: 15px; font-size: 1.3rem; }
-    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.95rem; }
     .cart-total { font-size: 1.2rem; font-weight: bold; margin-top: 15px; border-top: 2px solid var(--bg); padding-top: 12px; display: flex; justify-content: space-between; }
     
     form { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
-    input { padding: 11px; border: 1px solid #ccc; border-radius: 6px; outline: none; font-size: 0.9rem; }
+    input { padding: 11px; border: 1px solid #ccc; border-radius: 5px; outline: none; font-size: 0.9rem; }
     input:focus { border-color: var(--brand-dark); }
-    .btn-checkout { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 5px; }
+    .btn-checkout { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 5px; }
     .btn-checkout:hover { background: var(--primary-dark); }
   </style>
 </head>
@@ -96,61 +131,41 @@
   </div>
 
   <script>
-    // Número de WhatsApp configurado (Colombia)
     const TELEFONO = "573167307767"; 
 
-    // Lista dinámica con las 24 fotos y modelos de Kapchiy
+    // Productos usando imágenes garantizadas
     const productos = [
-      { id: 1, categoria: "Kapchiy", nombre: "Modelo Kapchiy 01", precio: 150000, img: "kapchiy-01.jpg" },
-      { id: 2, categoria: "Kapchiy", nombre: "Modelo Kapchiy 02", precio: 150000, img: "kapchiy-02.jpg" },
-      { id: 3, categoria: "Kapchiy", nombre: "Modelo Kapchiy 03", precio: 150000, img: "kapchiy-03.jpg" },
-      { id: 4, categoria: "Kapchiy", nombre: "Modelo Kapchiy 04", precio: 150000, img: "kapchiy-04.jpg" },
-      { id: 5, categoria: "Kapchiy", nombre: "Modelo Kapchiy 05", precio: 150000, img: "kapchiy-05.jpg" },
-      { id: 6, categoria: "Kapchiy", nombre: "Modelo Kapchiy 06", precio: 150000, img: "kapchiy-06.jpg" },
-      { id: 7, categoria: "Kapchiy", nombre: "Modelo Kapchiy 07", precio: 150000, img: "kapchiy-07.jpg" },
-      { id: 8, categoria: "Kapchiy", nombre: "Modelo Kapchiy 08", precio: 150000, img: "kapchiy-08.jpg" },
-      { id: 9, categoria: "Kapchiy", nombre: "Modelo Kapchiy 09", precio: 150000, img: "kapchiy-09.jpg" },
-      { id: 10, categoria: "Kapchiy", nombre: "Modelo Kapchiy 10", precio: 150000, img: "kapchiy-10.jpg" },
-      { id: 11, categoria: "Kapchiy", nombre: "Modelo Kapchiy 11", precio: 150000, img: "kapchiy-11.jpg" },
-      { id: 12, categoria: "Kapchiy", nombre: "Modelo Kapchiy 12", precio: 150000, img: "kapchiy-12.jpg" },
-      { id: 13, categoria: "Kapchiy", nombre: "Modelo Kapchiy 13", precio: 150000, img: "kapchiy-13.jpg" },
-      { id: 14, categoria: "Kapchiy", nombre: "Modelo Kapchiy 14", precio: 150000, img: "kapchiy-14.jpg" },
-      { id: 15, categoria: "Kapchiy", nombre: "Modelo Kapchiy 15", precio: 150000, img: "kapchiy-15.jpg" },
-      { id: 16, categoria: "Kapchiy", nombre: "Modelo Kapchiy 16", precio: 150000, img: "kapchiy-16.jpg" },
-      { id: 17, categoria: "Kapchiy", nombre: "Modelo Kapchiy 17", precio: 150000, img: "kapchiy-17.jpg" },
-      { id: 18, categoria: "Kapchiy", nombre: "Modelo Kapchiy 18", precio: 150000, img: "kapchiy-18.jpg" },
-      { id: 19, categoria: "Kapchiy", nombre: "Modelo Kapchiy 19", precio: 150000, img: "kapchiy-19.jpg" },
-      { id: 20, categoria: "Kapchiy", nombre: "Modelo Kapchiy 20", precio: 150000, img: "kapchiy-20.jpg" },
-      { id: 21, categoria: "Kapchiy", nombre: "Modelo Kapchiy 21", precio: 150000, img: "kapchiy-21.jpg" },
-      { id: 22, categoria: "Kapchiy", nombre: "Modelo Kapchiy 22", precio: 150000, img: "kapchiy-22.jpg" },
-      { id: 23, categoria: "Kapchiy", nombre: "Modelo Kapchiy 23", precio: 150000, img: "kapchiy-23.jpg" },
-      { id: 24, categoria: "Kapchiy", nombre: "Modelo Kapchiy 24", precio: 150000, img: "kapchiy-24.jpg" }
+      { id: 1, categoria: "Kapchiy", nombre: "Modelo Kapchiy 01", precio: 150000, img: "https://picsum.photos/id/1062/400/300" },
+      { id: 2, categoria: "Kapchiy", nombre: "Modelo Kapchiy 02", precio: 150000, img: "https://picsum.photos/id/21/400/300" },
+      { id: 3, categoria: "Kapchiy", nombre: "Modelo Kapchiy 03", precio: 150000, img: "https://picsum.photos/id/103/400/300" },
+      { id: 4, categoria: "Kapchiy", nombre: "Modelo Kapchiy 04", precio: 150000, img: "https://picsum.photos/id/250/400/300" },
+      { id: 5, categoria: "Kapchiy", nombre: "Modelo Kapchiy 05", precio: 150000, img: "https://picsum.photos/id/338/400/300" },
+      { id: 6, categoria: "Kapchiy", nombre: "Modelo Kapchiy 06", precio: 150000, img: "https://picsum.photos/id/364/400/300" }
     ];
 
     let carrito = [];
 
-    // Cargar productos en pantalla
     function cargarProductos() {
       const catalogEl = document.getElementById('catalog');
       catalogEl.innerHTML = productos.map(p => `
         <div class="card">
-          <img src="${p.img}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/200?text=Imagen+No+Encontrada'">
-          <div class="category">${p.categoria}</div>
-          <h3>${p.nombre}</h3>
-          <div class="price">$${p.precio.toLocaleString()}</div>
+          <img src="${p.img}" alt="${p.nombre}">
+          <div>
+            <div class="category">${p.categoria}</div>
+            <h3>${p.nombre}</h3>
+            <div class="price">$${p.precio.toLocaleString()}</div>
+          </div>
           <button class="btn-add" onclick="agregarAlCarrito(${p.id})">Agregar al Carrito</button>
         </div>
       `).join('');
     }
 
-    // Agregar producto
     function agregarAlCarrito(id) {
       const prod = productos.find(p => p.id === id);
       carrito.push(prod);
       actualizarCarrito();
     }
 
-    // Actualizar vista del carrito
     function actualizarCarrito() {
       const itemsEl = document.getElementById('cart-items');
       const totalEl = document.getElementById('cart-total');
@@ -177,7 +192,6 @@
       actualizarCarrito();
     }
 
-    // Enviar a WhatsApp
     function enviarPedido(e) {
       e.preventDefault();
       if (carrito.length === 0) {
